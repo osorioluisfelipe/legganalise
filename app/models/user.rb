@@ -6,5 +6,4 @@ class User < ApplicationRecord
 
   has_many :samples
   has_many :requests
-  validates :first_name, :last_name, :organization, presence: true
 end
