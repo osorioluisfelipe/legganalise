@@ -16,10 +16,26 @@ class SamplesController < ApplicationController
     @sample.user = current_user
 
     if @sample.save
-      redirect_to @sample, notice: 'sample was successfully created.'
+      redirect_to sample_path(@sample), notice: 'sample was successfully created.'
     else
       render :new
     end
+  end
+
+  def destroy
+    @sample = Sample.find(params[:id])
+    @sample.destroy
+    redirect_to samples_path, notice: 'sample was successfully destroyed'
+  end
+
+  def edit
+    @sample = Sample.find(params[:id])
+  end
+
+  def update
+    @sample = Sample.find(params[:id])
+    @sample.update(sample_params)
+    redirect_to sample_path(@sample)
   end
 
   private
