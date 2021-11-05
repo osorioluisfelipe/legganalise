@@ -5,6 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :samples
-
+  has_many :requests
   validates :first_name, :last_name, :organization, presence: true
 end
