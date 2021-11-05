@@ -2,7 +2,7 @@ class CreateRequests < ActiveRecord::Migration[6.0]
   def change
     create_table :requests do |t|
       t.integer :sample_quantity
-      t.datetime :request_date
+      t.datetime :request_date, default: DateTime.now
       t.datetime :approval_date
       t.datetime :results_date
       t.string :project_name
