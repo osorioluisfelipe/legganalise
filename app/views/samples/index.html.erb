@@ -1,4 +1,9 @@
-<h1><%= @samples.first.sample_name %></h1>
-<h1><%= @samples.first.sample_matrix %></h1>
-<h1><%= @samples.first.sample_type %></h1>
-<h1><%= @samples.first.user.first_name %></h1>
+<h1>Samples</h1>
+<div>
+  <% Sample.where(user_id: current_user).each do |sample| %>
+    <a href="samples/<%= sample.id %>"><%= sample.sample_name %></a>
+    <%= sample.sample_matrix %>
+    <%= sample.sample_type %>
+  <% end %>
+</div>
+<%= link_to 'Create a new sample', new_sample_path %>
