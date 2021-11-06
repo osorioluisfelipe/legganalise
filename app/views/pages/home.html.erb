@@ -1,2 +1,12 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<%= content_for(:navbar_class, "navbar-home") %>
+
+<div class="banner">
+  <div class="banner-content text-center">
+    <h1>LEGGA Analytics</h1>
+    <p>Espectrometria de Massas de Alta Resolução </p>
+    <% if user_signed_in? %>
+    <% else %>
+    <%= link_to "Comece Aqui", new_user_session_path, class: "btn-flat"  %>
+    <% end %>
+  </div>
+</div>
