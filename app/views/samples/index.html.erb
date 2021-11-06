@@ -1,4 +1,12 @@
-<h1><%= @samples.first.sample_name %></h1>
-<h1><%= @samples.first.sample_matrix %></h1>
-<h1><%= @samples.first.sample_type %></h1>
-<h1><%= @samples.first.user.first_name %></h1>
+<div class="container shadow-sm mt-2 bg-gradient-light ">
+  <br>
+  <%= render 'shared/search_form' %>
+  <div class="card" style="width: 100%">
+    <ul class="list-group list-group-flush">
+      <% @samples.each do |sample| %>
+      <li class="list-group-item"><%= sample.sample_name %></li>
+      <% end %>
+    </ul>
+  </div>
+  <br>
+</div>
