@@ -5,3 +5,7 @@
 <% else %>
   <h1><%= @sample.sample_name %></h1>
 <% end %>
+
+<%= link_to 'Update sample', edit_sample_path(@sample), data: { confirm: 'Are you sure do you wanto to edit this sample?' } %>
+<%= link_to 'Delete sample', sample_path(@sample), method: :delete, data: { confirm: 'Are you sure do you wanto to delete this sample?' } %>
+<%= link_to 'Back to samples', samples_path %>

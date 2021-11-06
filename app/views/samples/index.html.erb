@@ -1,12 +1,9 @@
-<div class="container shadow-sm mt-2 bg-gradient-light ">
-  <br>
-  <%= render 'shared/search_form' %>
-  <div class="card" style="width: 100%">
-    <ul class="list-group list-group-flush">
-      <% @samples.each do |sample| %>
-      <li class="list-group-item"><%= sample.sample_name %></li>
-      <% end %>
-    </ul>
-  </div>
-  <br>
+<h1>Samples</h1>
+<div>
+  <% Sample.where(user_id: current_user).each do |sample| %>
+    <a href="samples/<%= sample.id %>"><%= sample.sample_name %></a>
+    <%= sample.sample_matrix %>
+    <%= sample.sample_type %>
+  <% end %>
 </div>
+<%= link_to 'Create a new sample', new_sample_path %>
