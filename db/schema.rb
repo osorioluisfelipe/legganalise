@@ -10,29 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_05_152907) do
+ActiveRecord::Schema.define(version: 2021_11_06_144515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "lab_tests", force: :cascade do |t|
-    t.bigint "sample_id", null: false
-    t.bigint "request_id", null: false
-    t.boolean "sm_nd", default: false
-    t.boolean "sr_sr", default: false
-    t.boolean "c_o", default: false
-    t.boolean "u_pb_det", default: false
-    t.boolean "u_pb_ign", default: false
-    t.boolean "u_pb_carb", default: false
-    t.boolean "imag", default: false
-    t.boolean "mev", default: false
-    t.boolean "selfrag", default: false
-    t.boolean "sample_pulv", default: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["request_id"], name: "index_lab_tests_on_request_id"
-    t.index ["sample_id"], name: "index_lab_tests_on_sample_id"
-  end
 
   create_table "requests", force: :cascade do |t|
     t.integer "sample_quantity"
@@ -57,6 +38,7 @@ ActiveRecord::Schema.define(version: 2021_11_05_152907) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "analysis"
     t.index ["user_id"], name: "index_samples_on_user_id"
   end
 
@@ -77,8 +59,6 @@ ActiveRecord::Schema.define(version: 2021_11_05_152907) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "lab_tests", "requests"
-  add_foreign_key "lab_tests", "samples"
   add_foreign_key "requests", "users"
   add_foreign_key "samples", "users"
 end

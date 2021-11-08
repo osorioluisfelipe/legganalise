@@ -1,11 +1,31 @@
-<h1>Samples</h1>
-<div>
-  <% Sample.where(user_id: current_user).each do |sample| %>
-    <a href="samples/<%= sample.id %>"><%= sample.sample_name %></a>
-    <%= sample.sample_matrix %>
-    <%= sample.sample_type %>
-  <% end %>
+<div class="container shadow-sm mt-2 bg-gradient-light ">
+  <h1>Samples</h1>
+  <br>
+  <%= render 'shared/search_form' %>
+  <div class="card" style="width: 100%">
+    <ol class="list-group list-group-flush">
+      <% Sample.where(user_id: current_user).each do |sample| %>
+        <div class="list-group">
+          <a href="<%=sample_path(sample.id)%>" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">Identificação da Amostra: <%= sample.sample_name %></h5>
+            <% if (Time.now.to_i - sample.created_at.to_i)/86_400.0 < 1 %>
+              <small>Há < <%= ((Time.now.to_i - sample.created_at.to_i)/86_400.0).ceil %> dia</small>
+            <% else %>
+              <small> Há <%= ((Time.now.to_i - sample.created_at.to_i)/86_400.0).floor %> dia e <%= (((Time.now.to_i - sample.created_at.to_i)%86_400.0)/3600).floor %> horas</small>
+            <% end %>
+            </div>
+            <p class="mb-1"> Matriz: <%= sample.sample_matrix %></p>
+            <small>Tipo: <%= sample.sample_type %></small>
+          </a>
+        </div>
+      <% end %>
+    </ul>
+  </div>
+  <br>
+  <div>
+    <%= link_to 'Create a new sample', new_sample_path %>
+    <%= link_to 'Create a new request', new_request_path %>
+  </div>
+  <br>
 </div>
-
-<%= link_to 'Create a new sample', new_sample_path %>
-<%= link_to 'Create a new request', new_request_path %>
