@@ -1,0 +1,12 @@
+<div class="container">
+  <h2>New Analysis</h2>
+  <%= simple_form_for(@lab_analysis) do |f| %>
+    <div class="form-inputs">
+      <%= f.input :analysis_name, collection: LabAnalysis::LABANALYSIS %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, "Submit" %>
+    </div>
+  <% end %>
+</div>

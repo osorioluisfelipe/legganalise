@@ -40,7 +40,7 @@ class SamplesController < ApplicationController
   private
 
   def sample_params
-    params.require(:sample).permit(:sample_name, :sample_matrix, :sample_type)
+    params.require(:sample).permit(:sample_name, :sample_matrix, :sample_type, :analysis)
   end
 
 end
