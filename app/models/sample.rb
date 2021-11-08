@@ -1,7 +1,7 @@
 class Sample < ApplicationRecord
-  belongs_to :user
-  has_many :lab_analysis
-  has_many :requests, through: :lab_analysis
+  belongs_to :request
+  has_many :sample_analyses
+  has_many :lab_analyses, through: :sample_analyses
 
   validates :sample_name, :sample_type, :sample_matrix, presence: true
 end

@@ -1,20 +1,26 @@
 <div class="container">
   <h1>New request</h1>
 
-  <%= form_for(@request) do |f| %>
-    <%= f.label :sample_quantity %>
-    <%= f.number_field :sample_quantity %>
-    <%= f.label :request_date %>
-    <%= f.date_field :request_date %>
-    <%= f.label :approval_date %>
-    <%= f.date_field :approval_date %>
-    <%= f.label :results_date %>
-    <%= f.date_field :results_date %>
-    <%= f.label :project_name %>
-    <%= f.text_field :project_name %>
-    <%= f.label :project_summary %>
-    <%= f.text_field :project_summary %>
-    <%= f.submit %>
+  <%= simple_form_for [@request] do |f| %>
+    <div class="form-inputs">
+      <%= f.label :sample_quantity %>
+      <%= f.number_field :sample_quantity %>
+    </div>
+    <div class="form-inputs">
+      <%= f.label :request_date %>
+      <%= f.date_field :request_date %>
+    </div>
+    <div class="form-inputs">
+      <%= f.label :project_name %>
+      <%= f.text_field :project_name %>
+    </div>
+    <div class="form-inputs">
+      <%= f.label :project_summary %>
+      <%= f.text_field :project_summary %>
+    </div>
+    <div class="form-actions">
+      <%= f.submit %>
+    </div>
   <% end %>
 
   <%= link_to 'Back to requests', requests_path %>

@@ -10,19 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_08_151623) do
+ActiveRecord::Schema.define(version: 2021_11_08_221921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "lab_analyses", force: :cascade do |t|
     t.string "analysis_name"
-    t.bigint "request_id", null: false
-    t.bigint "sample_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["request_id"], name: "index_lab_analyses_on_request_id"
-    t.index ["sample_id"], name: "index_lab_analyses_on_sample_id"
   end
 
   create_table "requests", force: :cascade do |t|
@@ -41,14 +37,23 @@ ActiveRecord::Schema.define(version: 2021_11_08_151623) do
     t.index ["user_id"], name: "index_requests_on_user_id"
   end
 
+  create_table "sample_analyses", force: :cascade do |t|
+    t.bigint "sample_id", null: false
+    t.bigint "lab_analysis_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["lab_analysis_id"], name: "index_sample_analyses_on_lab_analysis_id"
+    t.index ["sample_id"], name: "index_sample_analyses_on_sample_id"
+  end
+
   create_table "samples", force: :cascade do |t|
     t.string "sample_name"
     t.string "sample_matrix"
     t.string "sample_type"
-    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_samples_on_user_id"
+    t.bigint "request_id"
+    t.index ["request_id"], name: "index_samples_on_request_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -68,8 +73,8 @@ ActiveRecord::Schema.define(version: 2021_11_08_151623) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "lab_analyses", "requests"
-  add_foreign_key "lab_analyses", "samples"
   add_foreign_key "requests", "users"
-  add_foreign_key "samples", "users"
+  add_foreign_key "sample_analyses", "lab_analyses"
+  add_foreign_key "sample_analyses", "samples"
+  add_foreign_key "samples", "requests"
 end

@@ -7,17 +7,14 @@ class SamplesController < ApplicationController
     @sample = Sample.find(params[:id])
   end
 
-  def new
-    @sample = Sample.new
-  end
-
   def create
+    @request = Request.find(params[:request_id])
     @sample = Sample.new(sample_params)
-    @sample.user = current_user
+    @sample.request = @request
     if @sample.save
-      redirect_to sample_path(@sample), notice: 'sample was successfully created.'
+      redirect_to request_path(@request), notice: 'sample was successfully created.'
     else
-      render :new
+      render "requests/show"
     end
   end
 
@@ -40,7 +37,7 @@ class SamplesController < ApplicationController
   private
 
   def sample_params
-    params.require(:sample).permit(:sample_name, :sample_matrix, :sample_type, :analysis)
+    params.require(:sample).permit(:sample_name, :sample_matrix, :sample_type)
   end
 
 end
