@@ -1,0 +1,11 @@
+<h1>List of Requests</h1>
+<ol>
+  <% @requests.each do |request| %>
+    <li>
+    <a href="requests/<%= request.id %>"><%= request.project_name %></a>
+    </li>
+  <% end %>
+</ol>
+
+<%= link_to 'Create a new request', new_request_path %>
+<%= link_to 'Create a new sample', new_sample_path %>
