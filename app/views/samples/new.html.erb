@@ -1,14 +1,17 @@
-<h2>New Sample</h2>
-<%= simple_form_for(@sample) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :sample_name %>
-    <%= f.input :sample_type %>
-    <%= f.input :sample_matrix %>
-  </div>
+<div class="container">
+  <h2>New Sample</h2>
+  <%= simple_form_for(@sample) do |f| %>
+    <div class="form-inputs">
+      <%= f.input :sample_name %>
+      <%= f.input :sample_type %>
+      <%= f.input :sample_matrix %>
+      <%= f.input :analysis,as: :check_boxes, collection: [ "sm_nd", "sr_sr", "c_o", "u_pb_det", "u_pb_ign", "u_pb_carb"] %>
+    </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Submit" %>
-  </div>
-<% end %>
+    <div class="form-actions">
+      <%= f.button :submit, "Submit" %>
+    </div>
+  <% end %>
 
-<%= link_to 'Back to samples', samples_path %>
+  <%= link_to 'Back to samples', samples_path %>
+</div>

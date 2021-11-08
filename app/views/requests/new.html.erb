@@ -1,19 +1,21 @@
-<h1>New request</h1>
+<div class="container">
+  <h1>New request</h1>
 
-<%= form_for(@request) do |f| %>
-  <%= f.label :sample_quantity %>
-  <%= f.number_field :sample_quantity %>
-  <%= f.label :request_date %>
-  <%= f.date_field :request_date %>
-  <%= f.label :approval_date %>
-  <%= f.date_field :approval_date %>
-  <%= f.label :results_date %>
-  <%= f.date_field :results_date %>
-  <%= f.label :project_name %>
-  <%= f.text_field :project_name %>
-  <%= f.label :project_summary %>
-  <%= f.text_field :project_summary %>
-  <%= f.submit %>
-<% end %>
+  <%= form_for(@request) do |f| %>
+    <%= f.label :sample_quantity %>
+    <%= f.number_field :sample_quantity %>
+    <%= f.label :request_date %>
+    <%= f.date_field :request_date %>
+    <%= f.label :approval_date %>
+    <%= f.date_field :approval_date %>
+    <%= f.label :results_date %>
+    <%= f.date_field :results_date %>
+    <%= f.label :project_name %>
+    <%= f.text_field :project_name %>
+    <%= f.label :project_summary %>
+    <%= f.text_field :project_summary %>
+    <%= f.submit %>
+  <% end %>
 
-<%= link_to 'Back to requests', requests_path %>
+  <%= link_to 'Back to requests', requests_path %>
+</div>

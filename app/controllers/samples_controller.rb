@@ -13,8 +13,8 @@ class SamplesController < ApplicationController
 
   def create
     @sample = Sample.new(sample_params)
+    raise
     @sample.user = current_user
-
     if @sample.save
       redirect_to sample_path(@sample), notice: 'sample was successfully created.'
     else
@@ -41,7 +41,7 @@ class SamplesController < ApplicationController
   private
 
   def sample_params
-    params.require(:sample).permit(:sample_name, :sample_matrix, :sample_type)
+    params.require(:sample).permit(:sample_name, :sample_matrix, :sample_type, :analysis)
   end
 
 end
