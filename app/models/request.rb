@@ -10,4 +10,7 @@ class Request < ApplicationRecord
     using: {
       tsearch: { prefix: true }
     }
+  def my_unique_id
+    "BOL %.3d/2021" % id
+  end
 end

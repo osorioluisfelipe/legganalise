@@ -1,27 +1,23 @@
-<div class="container">
-  <ul>
-    <% @samples.each do |sample| %>
-      <li>
-        <p><%= sample.sample_name %></p>
-
-          <p><%= link_to 'Select Analysis', new_sample_sample_analysis_path(sample.id)  %></p>
-
-          <ul> Análises solicitadas:
-          <% SampleAnalysis.where(sample_id: sample.id).each do |sample_analysis| %>
-            <li><%= sample_analysis.lab_analysis.analysis_name %></li>
-          <% end %>
-          </ul>
-
-      </li>
-    <% end %>
-  </ul>
-
-  <div>
+<div class="container bg-white mt-5 mb-5 p-5">
+  <div class="container border shadow p-3 mb-5 bg-light rounded">
+    <ul>
+      <% @samples.each do |sample| %>
+        <li>
+          <p><%= sample.sample_name %></p>
+            <p><%= link_to 'Selecione as Análises', new_sample_sample_analysis_path(sample.id)  %></p>
+            <ul> Análises solicitadas:
+              <% SampleAnalysis.where(sample_id: sample.id).each do |sample_analysis| %>
+                <li><%= sample_analysis.lab_analysis.analysis_name %></li>
+              <% end %>
+            </ul>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="container border shadow p-3 mb-5 bg-light rounded">
     <%= render 'shared/new_sample' %>
   </div>
-
-
-
-  <%= link_to 'Delete request', request_path(@request), method: :delete, data: { confirm: 'Are you sure do you wanto to delete this request?' } %>
-  <%= link_to 'Back to requests', requests_path %>
+  <div class="row justify-content-end mr-1">
+    <%= link_to 'Apagar Solicitação', request_path(@request), method: :delete, data: { confirm: 'Are you sure do you wanto to delete this request?' }, class: "btn btn-flat" %>
+  </div>
 </div>
