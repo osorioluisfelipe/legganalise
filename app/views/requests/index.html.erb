@@ -4,26 +4,34 @@
   <h1>List of Requests</h1>
     <div class="card" style="width: 100%">
       <ol class="list-group list-group-flush">
-        <% @requests.where(user_id: current_user).each do |request| %>
-          <div class="list-group">
-            <a href="<%=request_path(request.id)%>" class="list-group-item list-group-item-action">
-              <li class="ml-2">
-                <div class="d-flex w-100 justify-content-between">
-                  <h5 class="mb-1">Projeto: <%= request.project_name %></h5>
-                <% if (Time.now.to_i - request.created_at.to_i)/86_400.0 < 1 %>
-                  <small> Solicitado há < <%= ((Time.now.to_i - request.created_at.to_i)/86_400.0).ceil %> dia</small>
-                <% else %>
-                  <small> Solicitado há <%= ((Time.now.to_i - request.created_at.to_i)/86_400.0).floor %> dia e <%= (((Time.now.to_i - request.created_at.to_i)%86_400.0)/3600).floor %> horas</small>
-                <% end %>
-                </div>
-                <% if request.results_ready  %>
-                  <p class="mb-1"> Resultado Liberado em: <%= request.results_date %></p>
-                <% else %>
-                  <p class="mb-1"> Amostras em Processamento </p>
-                <% end %>
-              </li>
-            </a>
+        <% if @requests == "" %>
+          <div class="row justify-content-center">
+            <div class="alert alert-danger" role="alert">
+              "Sorry, <%= params[:query] %> was not found as part of a project name or summary"
+            </div>
           </div>
+        <% else %>
+          <% @requests.where(user_id: current_user).each do |request| %>
+            <div class="list-group">
+              <a href="<%=request_path(request.id)%>" class="list-group-item list-group-item-action">
+                <li class="ml-2">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Projeto: <%= request.project_name %></h5>
+                  <% if (Time.now.to_i - request.created_at.to_i)/86_400.0 < 1 %>
+                    <small> Solicitado há < <%= ((Time.now.to_i - request.created_at.to_i)/86_400.0).ceil %> dia</small>
+                  <% else %>
+                    <small> Solicitado há <%= ((Time.now.to_i - request.created_at.to_i)/86_400.0).floor %> dia e <%= (((Time.now.to_i - request.created_at.to_i)%86_400.0)/3600).floor %> horas</small>
+                  <% end %>
+                  </div>
+                  <% if request.results_ready  %>
+                    <p class="mb-1"> Resultado Liberado em: <%= request.results_date %></p>
+                  <% else %>
+                    <p class="mb-1"> Amostras em Processamento </p>
+                  <% end %>
+                </li>
+              </a>
+            </div>
+          <% end %>
         <% end %>
       </ol>
     </div>
