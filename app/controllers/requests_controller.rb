@@ -1,6 +1,14 @@
 class RequestsController < ApplicationController
   def index
-    @requests = Request.all
+    if params[:query].present?
+      if Request.search_by_project_name_and_project_summary(params[:query]).first.nil?
+        @requests = ""
+      else
+        @requests = Request.search_by_project_name_and_project_summary(params[:query])
+      end
+    else
+      @requests = Request.all
+    end
   end
 
   def show
