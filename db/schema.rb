@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2021_11_08_221921) do
 
   create_table "requests", force: :cascade do |t|
     t.integer "sample_quantity"
-    t.datetime "request_date", default: "2021-11-05 20:45:58"
+    t.datetime "request_date", default: "2021-11-05 18:02:50"
     t.datetime "approval_date"
     t.datetime "results_date"
     t.string "project_name"

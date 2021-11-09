@@ -1,23 +1,27 @@
-<div class="container">
-  <h1>New request</h1>
-
-  <%= simple_form_for [@request] do |f| %>
-    <div class="form-inputs">
-      <%= f.label :request_date %>
-      <%= f.date_field :request_date %>
-    </div>
-    <div class="form-inputs">
-      <%= f.label :project_name %>
-      <%= f.text_field :project_name %>
-    </div>
-    <div class="form-inputs">
-      <%= f.label :project_summary %>
-      <%= f.text_field :project_summary %>
-    </div>
-    <div class="form-actions">
-      <%= f.submit "Start Request" %>
-    </div>
-  <% end %>
-
-  <%= link_to 'Back to requests', requests_path %>
+<div class="container bg-white mt-5 pb-3">
+  <br>
+  <h1>Nova Solicitação</h1>
+  <br>
+  <div class="container border shadow p-3 mb-5 bg-light rounded">
+    <%= simple_form_for [@request] do |f| %>
+    <form>
+      <div class="form-group row">
+        <%= f.label :request_date, "Data da Solicitação", class: "col-sm-2 col-form-label" %>
+          <%= f.date_field :request_date, class: "col-sm-2" %>
+      </div>
+      <div class="form-group row">
+        <%= f.label :project_name, "Projeto", class: "col-sm-2 col-form-label" %>
+          <%= f.text_field :project_name, class: "col-sm-6" %>
+      </div>
+      <div class="form-group row">
+        <%= f.label :project_summary, "Resumo do Projeto", class: "col-sm-2 col-form-label" %>
+          <%= f.text_field :project_summary, class: "col-sm-9" %>
+      </div>
+    </form>
+      <br>
+      <div class="form-actions">
+        <%= f.submit "Iniciar Solicitação", class: "btn btn-flat" %>
+      </div>
+    <% end %>
+  </div>
 </div>

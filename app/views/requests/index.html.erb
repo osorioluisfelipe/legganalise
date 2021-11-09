@@ -1,7 +1,8 @@
 <div class="container">
-
+  <br>
   <%= render 'shared/search_form' %>
-  <h1>List of Requests</h1>
+  <br>
+  <h1>Solicitações</h1>
     <div class="card" style="width: 100%">
       <ol class="list-group list-group-flush">
         <% if @requests == "" %>
@@ -16,6 +17,7 @@
               <a href="<%=request_path(request.id)%>" class="list-group-item list-group-item-action">
                 <li class="ml-2">
                   <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1"> <%= request.my_unique_id %> </h5>
                     <h5 class="mb-1">Projeto: <%= request.project_name %></h5>
                   <% if (Time.now.to_i - request.created_at.to_i)/86_400.0 < 1 %>
                     <small> Solicitado há < <%= ((Time.now.to_i - request.created_at.to_i)/86_400.0).ceil %> dia</small>
@@ -35,7 +37,4 @@
         <% end %>
       </ol>
     </div>
-
-  <%= link_to 'Create a new request', new_request_path %>
-  <%= link_to 'Back to requests', requests_path %>
 </div>
