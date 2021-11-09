@@ -4,7 +4,7 @@
   <h1>List of Requests</h1>
     <div class="card" style="width: 100%">
       <ol class="list-group list-group-flush">
-        <% Request.where(user_id: current_user).each do |request| %>
+        <% @requests.where(user_id: current_user).each do |request| %>
           <div class="list-group">
             <a href="<%=request_path(request.id)%>" class="list-group-item list-group-item-action">
               <li class="ml-2">
@@ -25,9 +25,9 @@
             </a>
           </div>
         <% end %>
-      </ul>
+      </ol>
     </div>
 
   <%= link_to 'Create a new request', new_request_path %>
-  <%# <%= link_to 'Create a new sample', new_sample_path %>
+  <%= link_to 'Back to requests', requests_path %>
 </div>
