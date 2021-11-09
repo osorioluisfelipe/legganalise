@@ -7,7 +7,7 @@ class SampleAnalysesController < ApplicationController
 
   def create
     @sample = Sample.find(params[:sample_id])
-    @lab_analyses = LabAnalysis.where(id: params[:sample_analysis][:lab_analysis])
+    @lab_analyses = LabAnalysis.where(id: params[:sample_analysis][:lab_analysis_id])
     @lab_analyses.each do |analysis|
       sample_analysis = SampleAnalysis.new(sample: @sample, lab_analysis: analysis)
       sample_analysis.save

@@ -3,10 +3,6 @@
 
   <%= simple_form_for [@request] do |f| %>
     <div class="form-inputs">
-      <%= f.label :sample_quantity %>
-      <%= f.number_field :sample_quantity %>
-    </div>
-    <div class="form-inputs">
       <%= f.label :request_date %>
       <%= f.date_field :request_date %>
     </div>
@@ -19,7 +15,7 @@
       <%= f.text_field :project_summary %>
     </div>
     <div class="form-actions">
-      <%= f.submit %>
+      <%= f.submit "Start Request" %>
     </div>
   <% end %>
 
