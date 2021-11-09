@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users
   root to: 'pages#home'
-  resources :samples
-  resources :requests
-  resources :lab_analysis
+  devise_for :users
+  resources :requests do
+    resources :samples, only: [:new, :create]
+  end
+  resources :samples, only: :destroy do
+    resources :sample_analyses, only: [:new, :create]
+  end
 end

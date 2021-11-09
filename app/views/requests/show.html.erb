@@ -1,3 +1,4 @@
+<div class="container">
 <% if current_user.admin %>
   <h1><%= @request.project_name %></h1>
 <% elsif current_user.tecnician %>
@@ -6,5 +7,24 @@
   <h1><%= @request.project_name %></h1>
 <% end %>
 
-<%= link_to 'Delete request', request_path(@request), method: :delete, data: { confirm: 'Are you sure do you wanto to delete this request?' } %>
-<%= link_to 'Back to requests', requests_path %>
+  <ul>
+    <% @samples.each do |sample| %>
+      <li>
+        <p><%= sample.sample_name %></p>
+        <p><%= raise %></p>
+        <ul> Análises solicitadas:
+        <% SampleAnalysis.where(sample_id: sample.id).each do |sample_analysis| %>
+          <li><%= sample_analysis.lab_analysis.analysis_name %></li>
+        <% end %>
+        </ul>
+      </li>
+    <% end %>
+  </ul>
+
+  <div>
+    <%= render 'shared/new_sample' %>
+  </div>
+
+  <%= link_to 'Delete request', request_path(@request), method: :delete, data: { confirm: 'Are you sure do you wanto to delete this request?' } %>
+  <%= link_to 'Back to requests', requests_path %>
+</div>

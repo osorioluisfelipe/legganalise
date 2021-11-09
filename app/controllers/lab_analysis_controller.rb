@@ -1,4 +1,7 @@
 class LabAnalysisController < ApplicationController
+  def index
+    @analysis = LabAnalysis.all
+  end
   def new
     @lab_analysis = LabAnalysis.new
   end
