@@ -21,17 +21,22 @@
                   <li class="ml-2">
                     <div class="d-flex w-100 justify-content-between">
                       <h5 class="mb-1"> <%= request.my_unique_id %> </h5>
-                      <h5 class="mb-1">Projeto: <%= request.project_name %></h5>
+                      <h5 class="mb-1">Número de Amostras: <%= Sample.where(request_id: request.id).count %></h5>
                     <% if (Time.now.to_i - request.created_at.to_i)/86_400.0 < 1 %>
                       <small> Solicitado há < <%= ((Time.now.to_i - request.created_at.to_i)/86_400.0).ceil %> dia</small>
                     <% else %>
                       <small> Solicitado há <%= ((Time.now.to_i - request.created_at.to_i)/86_400.0).floor %> dia e <%= (((Time.now.to_i - request.created_at.to_i)%86_400.0)/3600).floor %> horas</small>
                     <% end %>
                     </div>
-                    <% if request.results_ready  %>
-                      <p class="mb-1"> ✅ Resultado Liberado em: <%= request.updated_at.to_s(:short) %></p>
+                    <% if request.request_approval %>
+                      <p> Solicitação Enviada </p>
+                      <% if request.results_ready  %>
+                        <p class="mb-1"> ✅ Resultado Liberado em: <%= request.updated_at.to_s(:short) %></p>
+                      <% else %>
+                        <p class="mb-1"> ⚠️ Amostras em Processamento </p>
+                      <% end %>
                     <% else %>
-                      <p class="mb-1"> ⚠️ Amostras em Processamento </p>
+                      <p> Solicitação Aguardando Envio </p>
                     <% end %>
                   </li>
                 </a>

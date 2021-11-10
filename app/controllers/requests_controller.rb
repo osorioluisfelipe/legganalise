@@ -24,7 +24,7 @@ class RequestsController < ApplicationController
   def create
     @request = Request.new(request_params)
     @request.user = current_user
-    if @request.save!
+    if @request.save
       redirect_to request_path(@request)
     else
       render :new
@@ -36,6 +36,16 @@ class RequestsController < ApplicationController
     @request.destroy
 
     redirect_to requests_path
+  end
+
+  def update
+    @request = Request.find(params[:id])
+    @request.request_approval = true
+    if @request.save
+      redirect_to request_path(@request)
+    else
+      render :new
+    end
   end
 
   private
