@@ -1,5 +1,5 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon <%= yield(:navbar_class) %>">
-  <%= link_to "https://www.unb.br/", class: "navbar-brand" do %>
+  <%= link_to "https://www.unb.br/",target: "_blank", class: "navbar-brand" do %>
     <%= image_tag "logo-unb.png" %>
   <% end %>
 
@@ -15,7 +15,7 @@
           <%= link_to "Home", "/requests", class: "nav-link" %>
         </li>
         <li class="nav-item">
-          <%= link_to "LEGGA", "http://legga.unb.br/", class: "nav-link" %>
+          <%= link_to "LEGGA", "http://legga.unb.br/",target: "_blank", class: "nav-link" %>
         </li>
         <li class="nav-item dropdown">
           <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>

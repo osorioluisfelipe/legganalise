@@ -14,7 +14,6 @@ class SampleAnalysesController < ApplicationController
     end
     redirect_to requests_path
   end
-  
 
   private
 
