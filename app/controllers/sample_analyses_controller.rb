@@ -14,8 +14,7 @@ class SampleAnalysesController < ApplicationController
     end
     redirect_to request_path(@sample.request_id)
   end
-
-
+  
   private
 
   def set_sample

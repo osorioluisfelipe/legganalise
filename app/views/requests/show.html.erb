@@ -1,5 +1,23 @@
 <div class="container bg-white mt-5 mb-5 p-5">
-  <h1><%= @request.my_unique_id %></h1>
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <h4>Projeto: <%= @request.project_name %></h4>
+        </div>
+        <div class="col">
+          <h2 class="text-right"><%= @request.my_unique_id %></h2>
+        </div>
+      </div>
+      <div class="row">
+      </div>
+      <div class="row">
+        <div class="col">
+          <h4>Resumo: <%= @request.project_summary %></h4>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="container border shadow p-3 mb-5 bg-light rounded">
       <div class="card">
         <div class="card-title">

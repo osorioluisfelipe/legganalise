@@ -29,9 +29,9 @@
                     <% end %>
                     </div>
                     <% if request.results_ready  %>
-                      <p class="mb-1"> Resultado Liberado em: <%= request.results_date %></p>
+                      <p class="mb-1"> ✅ Resultado Liberado em: <%= request.updated_at.to_s(:short) %></p>
                     <% else %>
-                      <p class="mb-1"> Amostras em Processamento </p>
+                      <p class="mb-1"> ⚠️ Amostras em Processamento </p>
                     <% end %>
                   </li>
                 </a>
