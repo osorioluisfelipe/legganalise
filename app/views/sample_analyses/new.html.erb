@@ -7,7 +7,7 @@
       <div class="row justify-content-center">
         <div class="col-12 col-md-10">
           <h5>Análises disponíveis:</h5>
-            <%= simple_form_for [@sample, @sample_analysis] do |f| %>
+           <%= simple_form_for [@sample, @sample_analysis] do |f| %>
             <%= f.collection_check_boxes :lab_analysis_id, LabAnalysis.all, :id, :analysis_name do |m| %>
               <%= m.check_box %> <%= m.label %>
             <% end %>

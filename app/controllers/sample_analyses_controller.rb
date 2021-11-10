@@ -12,9 +12,9 @@ class SampleAnalysesController < ApplicationController
       sample_analysis = SampleAnalysis.new(sample: @sample, lab_analysis: analysis)
       sample_analysis.save
     end
-    redirect_to requests_path
+    redirect_to request_path(@sample.request_id)
   end
-
+  
   private
 
   def set_sample
