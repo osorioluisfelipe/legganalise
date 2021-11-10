@@ -15,6 +15,9 @@
         <div class="col">
           <h4>Resumo: <%= @request.project_summary %></h4>
         </div>
+        <div class="col">
+          <h4 class="text-right">Número de Amostras: <%= Sample.where(request_id: @request.id).count %></h4>
+        </div>
       </div>
     </div>
   </div>
@@ -47,18 +50,31 @@
                     <% end %>
                   </p>
                 </div>
-                <div class="col text-right">
-                  <p><%= link_to 'Selecione as Análises', new_sample_sample_analysis_path(sample.id)  %></p>
-                </div>
+                <% if @request.request_approval %>
+                  <div class="col text-right">
+                    <p>Selecione as Análises</p>
+                  </div>
+                <% else %>
+                  <div class="col text-right">
+                    <p><%= link_to 'Selecione as Análises', new_sample_sample_analysis_path(sample.id)  %></p>
+                  </div>
+                <% end %>
               </div>
             </div>
           </div>
       <% end %>
   </div>
-  <div class="container border shadow p-3 mb-5 bg-light rounded">
-    <%= render 'shared/new_sample' %>
+  <% unless @request.request_approval %>
+    <div class="container border shadow p-3 mb-5 bg-light rounded">
+      <%= render 'shared/new_sample' %>
+    </div>
+  <div class="row justify-content-space-between">
+    <div class="col">
+      <%= link_to 'Apagar Solicitação', request_path(@request), method: :delete, data: { confirm: 'Tem certeza que deseja apagar a solicitação?' }, class: "btn btn-flat" %>
+    </div>
+    <div class="col text-right">
+      <%= link_to 'Enviar Solicitação', update_request_path, method: :update, data: { confirm: 'Confirma o envio da solicitação?' }, class: "btn btn-flat" %>
+    </div>
   </div>
-  <div class="row justify-content-end mr-1">
-    <%= link_to 'Apagar Solicitação', request_path(@request), method: :delete, data: { confirm: 'Are you sure do you wanto to delete this request?' }, class: "btn btn-flat" %>
-  </div>
+  <% end %>
 </div>
