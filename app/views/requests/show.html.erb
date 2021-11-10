@@ -48,7 +48,11 @@
                   </p>
                 </div>
                 <div class="col text-right">
-                  <p><%= link_to 'Selecione as Análises', new_sample_sample_analysis_path(sample.id)  %></p>
+                  <% if SampleAnalysis.where(sample_id: sample.id).blank? %>
+                    <p><%= link_to 'Selecione as Análises', new_sample_sample_analysis_path(sample.id)  %></p>
+                  <% else %>
+                    <p>Análises Selecionadas</p>
+                  <% end %>
                 </div>
               </div>
             </div>
