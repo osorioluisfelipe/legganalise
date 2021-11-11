@@ -46,9 +46,11 @@
                 </div>
                 <div class="col text-center">
                   <p>
+                    <% analysis = [] %>
                     <% SampleAnalysis.where(sample_id: sample.id).each do |sample_analysis| %>
-                      <%= sample_analysis.lab_analysis.analysis_name %>
+                      <% analysis << sample_analysis.lab_analysis.analysis_name %>
                     <% end %>
+                    <%= analysis.join(", ") %>
                   </p>
                 </div>
                 <% if @request.request_approval %>

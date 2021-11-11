@@ -1,3 +1,3 @@
 class LabAnalysis < ApplicationRecord
-  has_many :sample_analyses
+  has_many :sample_analyses, dependent: :destroy
 end

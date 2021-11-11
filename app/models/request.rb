@@ -11,6 +11,6 @@ class Request < ApplicationRecord
       tsearch: { prefix: true }
     }
   def my_unique_id
-    "BOL %.3d/2021" % id
+    "BOL %.3d/#{Date.today.year}" % id
   end
 end
