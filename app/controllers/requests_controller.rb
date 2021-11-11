@@ -41,16 +41,30 @@ class RequestsController < ApplicationController
   def update
     @request = Request.find(params[:id])
     @request.request_approval = true
-    if @request.save
+  
+    if @request.save!
       redirect_to request_path(@request)
     else
-      render :new
+      render "requests/:id"
+    end
+  end
+
+  def upload
+    @request = Request.find(params[:id])
+    unless params[:request][:result].nil?
+      @request.result.attach(params[:request][:result])
+      @request.results_ready = true
+    end
+    if @request.save!
+      redirect_to request_path(@request)
+    else
+      render "requests/:id"
     end
   end
 
   private
 
   def request_params
-    params.require(:request).permit(:sample_quantity, :request_date, :project_name, :project_summary)
+    params.require(:request).permit(:sample_quantity, :request_date, :project_name, :project_summary, :result)
   end
 end
