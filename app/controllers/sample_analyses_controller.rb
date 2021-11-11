@@ -12,9 +12,14 @@ class SampleAnalysesController < ApplicationController
       sample_analysis = SampleAnalysis.new(sample: @sample, lab_analysis: analysis)
       sample_analysis.save
     end
-    redirect_to request_path(@sample.request_id)
+    if @lab_analyses.blank?
+      flash[:notice] = "É necessário escolher pelo menos uma análise"
+      redirect_to new_sample_sample_analysis_path
+    else
+      redirect_to request_path(@sample.request_id)
+    end
   end
-  
+
   private
 
   def set_sample
