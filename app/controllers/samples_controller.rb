@@ -14,6 +14,7 @@ class SamplesController < ApplicationController
     if @sample.save
       redirect_to request_path(@request), notice: 'sample was successfully created.'
     else
+      flash[:error] = "Something went wrong"
       render "requests/show"
     end
   end
