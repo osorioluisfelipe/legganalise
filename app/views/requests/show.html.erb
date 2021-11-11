@@ -53,13 +53,13 @@
                     <%= analysis.join(", ") %>
                   </p>
                 </div>
-                <% if @request.request_approval %>
+                <% if SampleAnalysis.where(sample_id: sample.id).blank? %>
                   <div class="col text-right">
-                    <p>Selecione as Análises</p>
+                    <p><%= link_to 'Selecione as Análises', new_sample_sample_analysis_path(sample.id)  %></p>
                   </div>
                 <% else %>
                   <div class="col text-right">
-                    <p><%= link_to 'Selecione as Análises', new_sample_sample_analysis_path(sample.id)  %></p>
+                    <p>Análises Selecionadas</p>
                   </div>
                 <% end %>
               </div>
