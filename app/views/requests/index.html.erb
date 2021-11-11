@@ -1,49 +1,102 @@
+<%= render 'shared/tabs'%>
 <div class="container bg-light bg-white mt-5 mb-5 p-5">
-  <div class="container border shadow pt-3 bg-light rounded">
-    <%= render 'shared/search_form' %>
-  </div>
-  <br>
-  <div class="container border shadow p-3 mb-5 bg-light rounded">
-    <h1>Solicitações</h1>
-    <br>
-      <div class="card" style="width: 100%">
-        <ol class="list-group list-group-flush">
-          <% if @requests == "" %>
-            <div class="row justify-content-center">
-              <div class="alert alert-danger" role="alert">
-                "Sorry, <%= params[:query] %> was not found as part of a project name or summary"
+  <% if current_user.tecnician %>
+    <%# Search Bar %>
+    <div class="container border shadow pt-3 bg-light rounded">
+      <%= render 'shared/search_form' %>
+    </div>
+    <%# Index de Solicitações %>
+    <div class="container border shadow p-3 mb-5 bg-light rounded">
+      <h1>Solicitações</h1>
+      <br>
+        <div class="card" style="width: 100%">
+          <ol class="list-group list-group-flush">
+            <%# Retorno vazio a busca %>
+            <% if @requests == "" %>
+              <div class="row justify-content-center">
+                <div class="alert alert-danger" role="alert">
+                  "Desculpe, a busca por <%= params[:query] %> não foi encontrada"
+                </div>
               </div>
-            </div>
-          <% else %>
-            <% @requests.where(user_id: current_user).each do |request| %>
-              <div class="list-group">
-                <a href="<%=request_path(request.id)%>" class="list-group-item list-group-item-action">
-                  <li class="ml-2">
-                    <div class="d-flex w-100 justify-content-between">
-                      <h5 class="mb-1"> <%= request.my_unique_id %> </h5>
-                      <h5 class="mb-1">Número de Amostras: <%= Sample.where(request_id: request.id).count %></h5>
-                    <% if (Time.now.to_i - request.created_at.to_i)/86_400.0 < 1 %>
-                      <small> Solicitado há < <%= ((Time.now.to_i - request.created_at.to_i)/86_400.0).ceil %> dia</small>
-                    <% else %>
-                      <small> Solicitado há <%= ((Time.now.to_i - request.created_at.to_i)/86_400.0).floor %> dia e <%= (((Time.now.to_i - request.created_at.to_i)%86_400.0)/3600).floor %> horas</small>
-                    <% end %>
-                    </div>
-                    <% if request.request_approval %>
-                      <p> Solicitação Enviada </p>
-                      <% if request.results_ready  %>
-                        <p class="mb-1"> ✅ Resultado Liberado em: <%= request.updated_at.to_s(:short) %></p>
+            <%# Retorno da busca ou todas as solicitações %>
+            <% else %>
+              <% @requests.where(request_approval: true).each do |request| %>
+                <div class="list-group">
+                  <a href="<%=request_path(request.id)%>" class="list-group-item list-group-item-action">
+                    <li class="ml-2">
+                      <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1"> <%= request.my_unique_id %> </h5>
+                        <h5 class="mb-1">Número de Amostras: <%= Sample.where(request_id: request.id).count %></h5>
+                      <% if (Time.now.to_i - request.created_at.to_i)/86_400.0 < 1 %>
+                        <small> Solicitado há < <%= ((Time.now.to_i - request.created_at.to_i)/86_400.0).ceil %> dia</small>
                       <% else %>
-                        <p class="mb-1"> ⚠️ Amostras em Processamento </p>
+                        <small> Solicitado há <%= ((Time.now.to_i - request.created_at.to_i)/86_400.0).floor %> dia e <%= (((Time.now.to_i - request.created_at.to_i)%86_400.0)/3600).floor %> horas</small>
                       <% end %>
-                    <% else %>
-                      <p> Solicitação Aguardando Envio </p>
-                    <% end %>
-                  </li>
-                </a>
-              </div>
+                      </div>
+                      <%# Lógica de visualização da request no index (enviada(resultado liberado ou não)) %>
+                      <% if request.request_approval %>
+                        <p> Solicitação Enviada </p>
+                        <% if request.results_ready  %>
+                          <p class="mb-1"> ✅ Resultado Liberado em: <%= request.updated_at.to_s(:short) %></p>
+                        <% else %>
+                          <p class="mb-1"> ⚠️ Amostras em Processamento </p>
+                        <% end %>
+                      <% end %>
+                    </li>
+                  </a>
+                </div>
+              <% end %>
             <% end %>
-          <% end %>
-        </ol>
-      </div>
-  </div>
+          </ol>
+        </div>
+    </div>
+  <% else %>
+    <div class="container border shadow pt-3 bg-light rounded">
+      <%= render 'shared/search_form' %>
+    </div>
+    <br>
+    <div class="container border shadow p-3 mb-5 bg-light rounded">
+      <h1>Solicitações</h1>
+      <br>
+        <div class="card" style="width: 100%">
+          <ol class="list-group list-group-flush">
+            <% if @requests == "" %>
+              <div class="row justify-content-center">
+                <div class="alert alert-danger" role="alert">
+                  "Desculpe, a busca por <%= params[:query] %> não foi encontrada"
+                </div>
+              </div>
+            <% else %>
+              <% @requests.where(user_id: current_user).each do |request| %>
+                <div class="list-group">
+                  <a href="<%=request_path(request.id)%>" class="list-group-item list-group-item-action">
+                    <li class="ml-2">
+                      <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1"> <%= request.my_unique_id %> </h5>
+                        <h5 class="mb-1">Número de Amostras: <%= Sample.where(request_id: request.id).count %></h5>
+                      <% if (Time.now.to_i - request.created_at.to_i)/86_400.0 < 1 %>
+                        <small> Solicitado há < <%= ((Time.now.to_i - request.created_at.to_i)/86_400.0).ceil %> dia</small>
+                      <% else %>
+                        <small> Solicitado há <%= ((Time.now.to_i - request.created_at.to_i)/86_400.0).floor %> dia e <%= (((Time.now.to_i - request.created_at.to_i)%86_400.0)/3600).floor %> horas</small>
+                      <% end %>
+                      </div>
+                      <% if request.request_approval %>
+                        <p> Solicitação Enviada </p>
+                        <% if request.results_ready  %>
+                          <p class="mb-1"> ✅ Resultado Liberado em: <%= request.updated_at.to_s(:short) %></p>
+                        <% else %>
+                          <p class="mb-1"> ⚠️ Amostras em Processamento </p>
+                        <% end %>
+                      <% else %>
+                        <p> Solicitação Aguardando Envio </p>
+                      <% end %>
+                    </li>
+                  </a>
+                </div>
+              <% end %>
+            <% end %>
+          </ol>
+        </div>
+    </div>
+  <% end %>
 </div>

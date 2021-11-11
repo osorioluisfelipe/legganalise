@@ -1,10 +1,23 @@
 <ul class="list-inline tabs-underlined mt-2">
-  <li>
-    <a href="/requests" class="tab-underlined active">Solicitações</a>
-  </li>
-  <li>
-    <a href="/requests/new" class="tab-underlined active">Nova Solicitação</a>
-  </li>
+  <% if current_page?("/requests") %>
+    <li>
+      <a href="/requests" class="tab-underlined active">Solicitações</a>
+    </li>
+    <% unless current_user.tecnician %>
+      <li>
+        <a href="/requests/new" class="tab-underlined">Nova Solicitação</a>
+      </li>
+    <% end %>
+  <% else %>
+    <li>
+      <a href="/requests" class="tab-underlined">Solicitações</a>
+    </li>
+    <% unless current_user.tecnician %>
+      <li>
+        <a href="/requests/new" class="tab-underlined active">Nova Solicitação</a>
+      </li>
+    <% end %>
+  <% end %>
   <%# <li>
     <a href="#" class="tab-underlined">Conversations</a>
   </li> %>

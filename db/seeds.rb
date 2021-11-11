@@ -8,14 +8,14 @@
 
 puts 'Cleaning database'
 LabAnalysis.destroy_all
-LabAnalysis.create!(analysis_name: "sm_nd")
-LabAnalysis.create!(analysis_name: "sr_sr")
-LabAnalysis.create!(analysis_name: "c_o")
-LabAnalysis.create!(analysis_name: "u_pb_ign")
-LabAnalysis.create!(analysis_name: "u_pb_det")
-LabAnalysis.create!(analysis_name: "u_pb_carb")
-LabAnalysis.create!(analysis_name: "imageamento")
-LabAnalysis.create!(analysis_name: "mev")
-LabAnalysis.create!(analysis_name: "selfrag")
-LabAnalysis.create!(analysis_name: "pulverização")
+LabAnalysis.create!(analysis_name: "Sm-Nd")
+LabAnalysis.create!(analysis_name: "Sr-Sr")
+LabAnalysis.create!(analysis_name: "C-O")
+LabAnalysis.create!(analysis_name: "U-Pb (Ígneo)")
+LabAnalysis.create!(analysis_name: "U-Pb (Detrítico)")
+LabAnalysis.create!(analysis_name: "U-Pb (carbonato)")
+LabAnalysis.create!(analysis_name: "Imageamento (ICP-MS)")
+LabAnalysis.create!(analysis_name: "MEV")
+LabAnalysis.create!(analysis_name: "SelFrag")
+LabAnalysis.create!(analysis_name: "Pulverização de Amostra")
 puts "Finished!"
