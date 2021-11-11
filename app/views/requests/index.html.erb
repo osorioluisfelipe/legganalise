@@ -39,7 +39,7 @@
                           <p> Solicitação Enviada </p>
                           <% if request.results_ready  %>
                             <p><%= link_to "Resultado", rails_blob_path(request.result, disposition: 'attachment') %>
-                            <p class="mb-1"> ✅ Resultado Liberado em: <%= request.updated_at.to_s(:short) %></p>
+                            <p class="mb-1"> ✅ Resultado Liberado em: <%= (request.updated_at-10_800.0).to_s(:short) %></p>
                           <% else %>
                             <p class="mb-1"> ⚠️ Amostras em Processamento </p>
                           <% end %>
@@ -88,7 +88,7 @@
                           <p> Solicitação Enviada </p>
                           <% if request.results_ready  %>
                             <p><%= link_to "Resultado", rails_blob_path(request.result, disposition: 'attachment') %>
-                            <p class="mb-1"> ✅ Resultado Liberado em: <%= request.updated_at.to_s(:short) %></p>
+                            <p class="mb-1"> ✅ Resultado Liberado em: <%= (request.updated_at-10_800.0).to_s(:short) %></p>
                           <% else %>
                             <p class="mb-1"> ⚠️ Amostras em Processamento </p>
                           <% end %>

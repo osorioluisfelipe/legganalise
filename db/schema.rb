@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_11_185902) do
+ActiveRecord::Schema.define(version: 2021_11_11_214614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2021_11_11_185902) do
 
   create_table "requests", force: :cascade do |t|
     t.integer "sample_quantity"
-    t.datetime "request_date", default: "2021-11-05 18:02:50"
+    t.datetime "request_date", default: "2021-11-11 20:11:33"
     t.datetime "approval_date"
     t.datetime "results_date"
     t.string "project_name"
