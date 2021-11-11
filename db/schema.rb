@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2021_11_11_185902) do
 
   create_table "requests", force: :cascade do |t|
     t.integer "sample_quantity"
-    t.datetime "request_date", default: "2021-11-05 20:45:58"
+    t.datetime "request_date", default: "2021-11-09 15:00:40"
     t.datetime "approval_date"
     t.datetime "results_date"
     t.string "project_name"
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2021_11_11_185902) do
     t.string "sample_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "request_id"
+    t.bigint "request_id", null: false
     t.index ["request_id"], name: "index_samples_on_request_id"
   end
 
@@ -62,12 +62,13 @@ ActiveRecord::Schema.define(version: 2021_11_11_185902) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "first_name"
+    t.string "name"
     t.string "organization"
     t.boolean "admin", default: false
     t.boolean "tecnician", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "first_name"
     t.string "last_name"
     t.string "nickname"
     t.index ["email"], name: "index_users_on_email", unique: true
