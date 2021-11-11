@@ -70,8 +70,8 @@
   <% if current_user.tecnician %>
     <div class="container border shadow p-3 mb-5 bg-light rounded">
       <%= simple_form_for [ @request ] do |f| %>
-        <%= f.input :resultado, as: :file %>
-        <%= f.submit %>
+        <%= f.input :result, as: :file, label: :Resultado%>
+        <%= f.submit "Fazer upload" %>
       <% end %>
     </div>
   <% end %>

@@ -10,7 +10,7 @@
       <h1>Solicitações</h1>
       <br>
         <div class="card" style="width: 100%">
-          <ol class="list-group list-group-flush">
+          <ul class="list-group list-group-flush">
             <%# Retorno vazio a busca %>
             <% if @requests == "" %>
               <div class="row justify-content-center">
@@ -32,22 +32,25 @@
                       <% else %>
                         <small> Solicitado há <%= ((Time.now.to_i - request.created_at.to_i)/86_400.0).floor %> dia e <%= (((Time.now.to_i - request.created_at.to_i)%86_400.0)/3600).floor %> horas</small>
                       <% end %>
-                      </div>
                       <%# Lógica de visualização da request no index (enviada(resultado liberado ou não)) %>
-                      <% if request.request_approval %>
-                        <p> Solicitação Enviada </p>
-                        <% if request.results_ready  %>
-                          <p class="mb-1"> ✅ Resultado Liberado em: <%= request.updated_at.to_s(:short) %></p>
-                        <% else %>
-                          <p class="mb-1"> ⚠️ Amostras em Processamento </p>
+                      </div>
+                      <div>
+                        <% if request.request_approval %>
+                          <p> Solicitação Enviada </p>
+                          <% if request.results_ready  %>
+                            <p><%= link_to "Resultado", rails_blob_path(request.result, disposition: 'attachment') %>
+                            <p class="mb-1"> ✅ Resultado Liberado em: <%= request.updated_at.to_s(:short) %></p>
+                          <% else %>
+                            <p class="mb-1"> ⚠️ Amostras em Processamento </p>
+                          <% end %>
                         <% end %>
-                      <% end %>
+                      </div>
                     </li>
                   </a>
                 </div>
               <% end %>
             <% end %>
-          </ol>
+          </ul>
         </div>
     </div>
   <% else %>
@@ -59,7 +62,7 @@
       <h1>Solicitações</h1>
       <br>
         <div class="card" style="width: 100%">
-          <ol class="list-group list-group-flush">
+          <ul class="list-group list-group-flush">
             <% if @requests == "" %>
               <div class="row justify-content-center">
                 <div class="alert alert-danger" role="alert">
@@ -80,22 +83,25 @@
                         <small> Solicitado há <%= ((Time.now.to_i - request.created_at.to_i)/86_400.0).floor %> dia e <%= (((Time.now.to_i - request.created_at.to_i)%86_400.0)/3600).floor %> horas</small>
                       <% end %>
                       </div>
-                      <% if request.request_approval %>
-                        <p> Solicitação Enviada </p>
-                        <% if request.results_ready  %>
-                          <p class="mb-1"> ✅ Resultado Liberado em: <%= request.updated_at.to_s(:short) %></p>
+                      <div>
+                        <% if request.request_approval %>
+                          <p> Solicitação Enviada </p>
+                          <% if request.results_ready  %>
+                            <p><%= link_to "Resultado", rails_blob_path(request.result, disposition: 'attachment') %>
+                            <p class="mb-1"> ✅ Resultado Liberado em: <%= request.updated_at.to_s(:short) %></p>
+                          <% else %>
+                            <p class="mb-1"> ⚠️ Amostras em Processamento </p>
+                          <% end %>
                         <% else %>
-                          <p class="mb-1"> ⚠️ Amostras em Processamento </p>
+                          <p> Solicitação Aguardando Envio </p>
                         <% end %>
-                      <% else %>
-                        <p> Solicitação Aguardando Envio </p>
-                      <% end %>
+                      </div>
                     </li>
                   </a>
                 </div>
               <% end %>
             <% end %>
-          </ol>
+          </ul>
         </div>
     </div>
   <% end %>

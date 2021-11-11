@@ -3,6 +3,7 @@ class Request < ApplicationRecord
   has_many :samples, dependent: :destroy
   has_many :lab_analysis, through: :samples
   validates :project_name, :project_summary, presence: true
+  has_one_attached :result
 
   include PgSearch::Model
   pg_search_scope :search_by_project_name_and_project_summary,
