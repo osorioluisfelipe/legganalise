@@ -7,12 +7,9 @@
   <div class="card card-body">
     <%= simple_form_for [@request, @sample] do |f| %>
       <div class="form-inputs">
-        <%= f.label :sample_name, "Identificação da Amostra" %>
-          <%= f.text_field :sample_name %>
-        <%= f.label :sample_type, "Tipo" %>
-          <%= f.text_field :sample_type %>
-        <%= f.label :sample_matrix, "Matriz" %>
-          <%= f.text_field :sample_matrix %>
+        <%= f.input :sample_name, label:"Identificação da Amostra" %>
+        <%= f.input :sample_type, label:"Tipo" %>
+        <%= f.input :sample_matrix, label:"Matriz" %>
       </div>
       <br>
       <div class="form-actions">

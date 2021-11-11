@@ -37,7 +37,7 @@
           </div>
         </div>
       </div>
-      <% @samples.each do |sample| %>
+      <% @request.samples.each do |sample| %>
           <div class="card">
             <div class="card-body">
               <div class="row">
@@ -84,7 +84,7 @@
       <%= link_to 'Apagar Solicitação', request_path(@request), method: :delete, data: { confirm: 'Tem certeza que deseja apagar a solicitação?' }, class: "btn btn-flat" %>
     </div>
     <div class="col text-right">
-      <%= link_to 'Enviar Solicitação', update_request_path, method: :update, data: { confirm: 'Confirma o envio da solicitação?' }, class: "btn btn-flat" %>
+      <%= link_to 'Enviar Solicitação', update_request_path(@request), method: :update, data: { confirm: 'Confirma o envio da solicitação?' }, class: "btn btn-flat" %>
     </div>
   </div>
   <% end %>
