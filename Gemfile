@@ -35,7 +35,6 @@ gem 'font-awesome-sass'
 gem 'simple_form'
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
-  gem 'dotenv-rails'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -50,6 +49,8 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+gem 'dotenv-rails', groups: [:development, :test]
+
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
@@ -62,3 +63,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'pg_search', '~> 2.3.0'
+
+gem 'cloudinary', '~> 1.16.0'
