@@ -35,7 +35,7 @@
                 <% end %>
               </p>
                 <% if request.results_ready  %>
-                  <a href="<%rails_blob_path(request.result, disposition: 'attachment')%>" >Resultado</a>
+                  <%= link_to "Resultado" ,rails_blob_path(request.result, disposition: 'attachment')%>
                 <% end %>
             </div>
           </div>

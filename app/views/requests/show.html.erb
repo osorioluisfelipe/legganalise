@@ -81,17 +81,28 @@
       <% end %>
     </div>
   <% end %>
-  <% unless @request.request_approval %>
+  <% if @request.samples.blank? %>
     <div class="container border shadow p-3 mb-5 bg-light rounded">
       <%= render 'shared/new_sample' %>
     </div>
-  <div class="row justify-content-space-between">
+    <div class="row justify-content-space-between">
     <div class="col">
       <%= link_to 'Apagar Solicitação', request_path(@request), method: :delete, data: { confirm: 'Tem certeza que deseja apagar a solicitação?' }, class: "btn btn-flat" %>
     </div>
-    <div class="col text-right">
-      <%= link_to 'Enviar Solicitação', update_request_path(@request), method: :update, data: { confirm: 'Confirma o envio da solicitação?' }, class: "btn btn-flat" %>
-    </div>
   </div>
+  <% else %>
+    <% unless @request.request_approval %>
+      <div class="container border shadow p-3 mb-5 bg-light rounded">
+        <%= render 'shared/new_sample' %>
+      </div>
+    <div class="row justify-content-space-between">
+      <div class="col">
+        <%= link_to 'Apagar Solicitação', request_path(@request), method: :delete, data: { confirm: 'Tem certeza que deseja apagar a solicitação?' }, class: "btn btn-flat" %>
+      </div>
+      <div class="col text-right">
+          <%= link_to 'Enviar Solicitação', update_request_path(@request), method: :update, data: { confirm: 'Confirma o envio da solicitação?' }, class: "btn btn-flat" %>
+      </div>
+    </div>
+    <% end %>
   <% end %>
 </div>

@@ -9,8 +9,14 @@
         </div>
         <br>
         <div class="form-actions">
-          <%= f.button :submit, "Editar Amostra", method: :update, class: "btn btn-flat" %>
-          <%= link_to 'Back to request', request_path(@sample.request) %>
+          <div class="row justify-content-space-between">
+            <div class="col">
+              <%= f.button :submit, "Editar Amostra", method: :update, class: "btn btn-flat" %>
+            </div>
+            <div class="col text-right">
+              <%= link_to 'Voltar para solicitação', request_path(@sample.request), class: "btn btn-flat" %>
+            </div>
+          </div>
         </div>
       <% end %>
     </div>
