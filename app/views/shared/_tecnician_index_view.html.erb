@@ -10,7 +10,7 @@
       <% else %>
         <% @requests.where(request_approval: true).each do |request| %>
           <div class="card shadow mt-2 mb-2">
-            <h5 class="card-header"><%= request.my_unique_id %></h5>
+            <h5 class="card-header"><%= link_to request.my_unique_id, request_path(request) %></h5>
             <div class="card-body row pb-2">
               <h5 class="card-title col"><%= request.project_name %></h5>
               <h5 class="card-text col">Número de Amostras: <%= Sample.where(request_id: request.id).count %></h5>
