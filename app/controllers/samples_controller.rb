@@ -12,7 +12,7 @@ class SamplesController < ApplicationController
     @sample = Sample.new(sample_params)
     @sample.request = @request
     if @sample.save
-      redirect_to request_path(@request), notice: 'sample was successfully created.'
+      redirect_to request_path(@request), notice: 'Amostra adicionada com sucesso!'
     else
       flash[:error] = "Something went wrong"
       render "requests/show"
@@ -23,7 +23,7 @@ class SamplesController < ApplicationController
     @sample = Sample.find(params[:id])
     request = @sample.request
     @sample.destroy
-    redirect_to request_path(request), notice: 'sample was successfully destroyed'
+    redirect_to request_path(request), notice: 'Amostra deletada com sucesso!'
   end
 
   def edit

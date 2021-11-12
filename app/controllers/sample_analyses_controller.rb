@@ -13,10 +13,10 @@ class SampleAnalysesController < ApplicationController
       sample_analysis.save
     end
     if @lab_analyses.blank?
-      flash[:notice] = "É necessário escolher pelo menos uma análise"
+      flash[:notice] = "Escolher pelo menos uma análise"
       redirect_to new_sample_sample_analysis_path
     else
-      redirect_to request_path(@sample.request_id)
+      redirect_to request_path(@sample.request_id), notice: "Análises selecionadas com sucesso!"
     end
   end
 

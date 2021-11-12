@@ -40,9 +40,11 @@
       <% @request.samples.each do |sample| %>
           <div class="card">
             <div class="card-body">
-              <div class="row">
+              <div class="row align-items-center">
                 <div class="col text-left">
                   <h5><%= sample.sample_name %></h5>
+                  <h6>Tipo: <%= sample.sample_type %></h6>
+                  <h6>Matriz: <%= sample.sample_matrix %></h6>
                 </div>
                 <div class="col text-center">
                   <p>
@@ -61,7 +63,7 @@
                   <div class="col text-right">
                     <p>Análises Selecionadas ✅</p>
                     <% unless @request.request_approval %>
-                      <p><%= link_to 'Deletar amostra', sample_path(id: sample.id), method: :delete, data: { confirm: 'Tem certeza de que quer deletar a amostra?' } %><p>
+                      <p><%= link_to 'Remover amostra', sample_path(id: sample.id), method: :delete, data: { confirm: 'Tem certeza de que quer deletar a amostra?' } %><p>
                     <% end %>
                   </div>
                 <% end %>
