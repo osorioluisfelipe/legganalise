@@ -24,7 +24,7 @@ class RequestsController < ApplicationController
     @request = Request.new(request_params)
     @request.user = current_user
     if @request.save
-      redirect_to request_path(@request)
+      redirect_to request_path(@request), notice: "Solicitação criada com sucesso!"
     else
       render :new
     end
@@ -34,7 +34,7 @@ class RequestsController < ApplicationController
     @request = Request.find(params[:id])
     @request.destroy
 
-    redirect_to requests_path
+    redirect_to requests_path, notice: "Solicitação excluída com sucesso!"
   end
 
   def update
