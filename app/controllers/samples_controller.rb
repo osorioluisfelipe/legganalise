@@ -33,7 +33,7 @@ class SamplesController < ApplicationController
   def update
     @sample = Sample.find(params[:id])
     @sample.update(sample_params)
-    redirect_to sample_path(@sample)
+    redirect_to request_path(@sample.request), notice: 'sample was successfully edited'
   end
 
   private
