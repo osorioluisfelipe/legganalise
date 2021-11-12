@@ -32,6 +32,8 @@
                     <p> Solicitação Enviada </p>
                     <p class="mb-1"> ⚠️ Amostras em Processamento </p>
                   <% end %>
+                <% else %>
+                  <p> Solicitação Aguardando Envio </p>
                 <% end %>
               </p>
                 <% if request.results_ready  %>
