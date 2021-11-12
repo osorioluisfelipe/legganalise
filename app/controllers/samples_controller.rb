@@ -21,8 +21,9 @@ class SamplesController < ApplicationController
 
   def destroy
     @sample = Sample.find(params[:id])
+    request = @sample.request
     @sample.destroy
-    redirect_to samples_path, notice: 'sample was successfully destroyed'
+    redirect_to request_path(request), notice: 'sample was successfully destroyed'
   end
 
   def edit

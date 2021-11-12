@@ -60,6 +60,7 @@
                 <% else %>
                   <div class="col text-right">
                     <p>Análises Selecionadas</p>
+                    <p><%= link_to 'Deletar amostra', sample_path(id: sample.id), method: :delete, data: { confirm: 'Tem certeza de que quer deletar a amostra?' } %><p>
                   </div>
                 <% end %>
               </div>
