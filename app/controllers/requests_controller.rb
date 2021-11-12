@@ -42,7 +42,7 @@ class RequestsController < ApplicationController
     @request.request_approval = true
 
     if @request.save!
-      redirect_to request_path(@request)
+      redirect_to request_path(@request), notice: "Solicitação enviada!"
     else
       render "requests/:id"
     end
