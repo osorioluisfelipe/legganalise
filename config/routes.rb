@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :requests, except: [:update] do
     resources :samples, only: [:new, :create]
   end
-  resources :samples, only: :destroy do
+  resources :samples, only: [:edit, :update, :destroy] do
     resources :sample_analyses, only: [:new, :create]
   end
 end

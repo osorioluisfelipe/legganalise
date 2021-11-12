@@ -13,7 +13,6 @@ class RequestsController < ApplicationController
 
   def show
     @request = Request.find(params[:id])
-    # @samples = @request.samples ||[]
     @sample = Sample.new
   end
 
@@ -41,7 +40,7 @@ class RequestsController < ApplicationController
   def update
     @request = Request.find(params[:id])
     @request.request_approval = true
-  
+
     if @request.save!
       redirect_to request_path(@request)
     else
