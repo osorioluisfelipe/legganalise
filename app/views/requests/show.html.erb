@@ -64,6 +64,7 @@
                     <p>Análises Selecionadas ✅</p>
                     <% unless @request.request_approval %>
                       <p><%= link_to 'Remover amostra', sample_path(id: sample.id), method: :delete, data: { confirm: 'Tem certeza de que quer deletar a amostra?' } %><p>
+                      <p><%= link_to 'Editar amostra', edit_sample_path(sample), data: { confirm: 'Tem certeza de que quer editar a amostra?' } %><p>
                     <% end %>
                   </div>
                 <% end %>

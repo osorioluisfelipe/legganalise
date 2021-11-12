@@ -13,7 +13,6 @@ class RequestsController < ApplicationController
 
   def show
     @request = Request.find(params[:id])
-    # @samples = @request.samples ||[]
     @sample = Sample.new
   end
 

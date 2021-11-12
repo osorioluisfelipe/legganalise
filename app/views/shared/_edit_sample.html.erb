@@ -1,14 +1,18 @@
-<%= simple_form_for [ @sample ] do |f| %>
-  <div class="form-inline justify-items-center">
-    <%= f.input :sample_name %>
-    <span></span>
-    <%= f.input :sample_type %>
-    <span></span>
-    <%= f.input :sample_matrix %>
+<div class="container bg-white mt-5 mb-5 p-5">
+  <div class="container border shadow p-3 mb-5 bg-light rounded">
+    <div class="card card-body">
+      <%= simple_form_for [@sample] do |f| %>
+        <div class="form-inputs">
+          <%= f.input :sample_name, label:"Identificação da Amostra" %>
+          <%= f.input :sample_type, label:"Tipo" %>
+          <%= f.input :sample_matrix, label:"Matriz" %>
+        </div>
+        <br>
+        <div class="form-actions">
+          <%= f.button :submit, "Editar Amostra", method: :update, class: "btn btn-flat" %>
+          <%= link_to 'Back to request', request_path(@sample.request) %>
+        </div>
+      <% end %>
+    </div>
   </div>
-  <br>
-  <div class="d-flex justify-content-center">
-    <%= f.submit "Submit a sample", method: :update %>
-    <%= link_to 'Back to samples', samples_path %>
-  </div>
-<% end %>
+</div>
