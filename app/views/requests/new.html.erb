@@ -5,21 +5,26 @@
   <br>
   <div class="container border shadow p-3 mb-5 bg-light rounded">
     <%= simple_form_for [@request] do |f| %>
-      <div class="form-group row">
-        <%= f.label :request_date, "Data da Solicitação", class: "col-sm-2 col-form-label" %>
-        <%= f.date_field :request_date, class: "col-sm-2" %>
+      <div class="form-group row ml-2">
+        <div class="col-3">
+          <%= f.input :request_date,as: :date, html5: true, label: "Data da Solicitação"%>
+        </div>
       </div>
-      <div class="form-group row">
-        <%= f.label :project_name, "Projeto", class: "col-sm-2 col-form-label" %>
-        <%= f.text_field :project_name, class: "col-sm-6" %>
+      <div class="form-group row ml-2">
+        <div class="col-9">
+          <%= f.input :project_name, label: "Projeto"%>
+        </div>
       </div>
-      <div class="form-group row">
-        <%= f.label :project_summary, "Resumo do Projeto", class: "col-sm-2 col-form-label" %>
-        <%= f.text_field :project_summary, class: "col-sm-9" %>
+      <div class="form-group row ml-2">
+        <div class="col-9">
+          <%= f.input :project_summary, label: "Resumo do Projeto"%>
+        </div>
       </div>
       <br>
-      <div class="form-actions">
-        <%= f.submit "Iniciar Solicitação", class: "btn btn-flat" %>
+      <div class="form-actions row ml-2">
+        <div class="col">
+          <%= f.submit "Iniciar Solicitação", class: "btn btn-flat" %>
+        </div>
       </div>
     <% end %>
   </div>
