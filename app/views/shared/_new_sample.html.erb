@@ -8,8 +8,8 @@
     <%= simple_form_for [@request, @sample] do |f| %>
       <div class="form-inputs">
         <%= f.input :sample_name, label:"Identificação da Amostra" %>
+        <%= f.input :sample_matrix, label: "Matriz", collection: [ "Rocha", "Mineral", "Carbonato", "Água", "Solo", "Material Biológico", "Outros"]  %>
         <%= f.input :sample_type, label:"Tipo" %>
-        <%= f.input :sample_matrix, label:"Matriz" %>
       </div>
       <br>
       <div class="form-actions">
