@@ -6,8 +6,11 @@ class Request < ApplicationRecord
   has_one_attached :result
 
   include PgSearch::Model
-  pg_search_scope :search_by_project_name_and_project_summary,
-    against: [ :project_name, :project_summary, :id],
+  pg_search_scope :global_search,
+    against: %i[ project_name project_summary id],
+    associated_against: {
+    samples: %i[ sample_name sample_type sample_matrix id]
+    },
     using: {
       tsearch: { prefix: true }
     }
