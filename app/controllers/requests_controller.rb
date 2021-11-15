@@ -1,10 +1,10 @@
 class RequestsController < ApplicationController
   def index
     if params[:query].present?
-      if Request.search_by_project_name_and_project_summary(params[:query]).first.nil?
+      if Request.global_search(params[:query]).first.nil?
         @requests = ""
       else
-        @requests = Request.search_by_project_name_and_project_summary(params[:query])
+        @requests = Request.global_search(params[:query])
       end
     else
       @requests = Request.all
