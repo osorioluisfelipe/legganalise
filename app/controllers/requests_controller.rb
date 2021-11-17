@@ -39,10 +39,18 @@ class RequestsController < ApplicationController
 
   def update
     @request = Request.find(params[:id])
-    @request.request_approval = true
+    if @request.request_approval
+      if @request.entry_approval && @request.results_ready
+        @request.results_approval = true
+      else
+        @request.entry_approval = true
+      end
+    else
+      @request.request_approval = true
+    end
 
     if @request.save!
-      redirect_to request_path(@request), notice: "Solicitação enviada!"
+      redirect_to request_path(@request)
     else
       render "requests/:id"
     end
@@ -62,7 +70,7 @@ class RequestsController < ApplicationController
   end
 
   private
-
+  
   def request_params
     params.require(:request).permit(:sample_quantity, :request_date, :project_name, :project_summary, :result)
   end
