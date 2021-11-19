@@ -9,9 +9,74 @@
       </div>
     </div>
   <% else %>
-    <% @requests.where(request_approval: true).each do |request| %>
+    <% @requests.where(request_approval: true, entry_approval: false).limit(5).each do |request| %>
       <div class="card shadow mt-2 mb-2">
-        <h5 class="card-header"><%= link_to request.my_unique_id, request_path(request) %></h5>
+        <div class="card-header">
+          <div class="row">
+            <div class="col">
+              <h5><%= link_to request.my_unique_id, request_path(request) %></h5>
+            </div>
+            <div class="col">
+              <h5 class="text-right">Cliente: <%= request.user.first_name %> <%= request.user.last_name  %></h5>
+            </div>
+          </div>
+        </div>
+        <div class="card-body row pb-2">
+          <h5 class="card-title col"><%= request.project_name %></h5>
+          <h5 class="card-text col">Número de Amostras: <%= Sample.where(request_id: request.id).count %></h5>
+          <div class="col text-right">
+            <% if (Time.now.to_i - request.created_at.to_i)/86_400.0 < 1 %>
+              <small> Solicitado há < <%= ((Time.now.to_i - request.created_at.to_i)/86_400.0).ceil %> dia</small>
+            <% else %>
+              <small> Solicitado há <%= ((Time.now.to_i - request.created_at.to_i)/86_400.0).floor %> dia e <%= (((Time.now.to_i - request.created_at.to_i)%86_400.0)/3600).floor %> horas</small>
+            <% end %>
+          </div>
+        </div>
+        <div class="card-footer bg-white">
+        <%# Lógica de visualização da request no index (enviada(resultado liberado ou não)) %>
+          <p>
+            <% if request.request_approval %>
+              <% if request.results_approval %>
+                <p class="mb-1"> ✅ Resultado Liberado em: <%= (request.updated_at-10_800.0).to_s(:short) %></p>
+              <% elsif request.entry_approval %>
+                <p> Solicitação Recebida </p>
+                <p class="mb-1"> ⚠️ Amostras em Processamento </p>
+              <% else %>
+                <p> Solicitação enviada pelo cliente </p>
+              <% end %>
+            <% end %>
+          </p>
+            <% if request.results_approval %>
+              <%= link_to "Resultado" ,rails_blob_path(request.result, disposition: 'attachment')%>
+            <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<div class="container border shadow p-3 mb-5 mt-5 bg-light rounded">
+  <h1>Solicitações em processamento</h1>
+  <br>
+  <%# Retorno vazio a busca %>
+  <% if @requests == "" %>
+    <div class="row justify-content-center">
+      <div class="alert alert-danger" role="alert">
+        "Desculpe, a busca por <%= params[:query] %> não foi encontrada"
+      </div>
+    </div>
+  <% else %>
+    <% @requests.where(entry_approval: true, results_ready: false).limit(5).each do |request| %>
+      <div class="card shadow mt-2 mb-2">
+        <div class="card-header">
+          <div class="row">
+            <div class="col">
+              <h5><%= link_to request.my_unique_id, request_path(request) %></h5>
+            </div>
+            <div class="col">
+              <h5 class="text-right">Cliente: <%= request.user.first_name %> <%= request.user.last_name  %></h5>
+            </div>
+          </div>
+        </div>
         <div class="card-body row pb-2">
           <h5 class="card-title col"><%= request.project_name %></h5>
           <h5 class="card-text col">Número de Amostras: <%= Sample.where(request_id: request.id).count %></h5>
@@ -54,9 +119,18 @@
       </div>
     </div>
   <% else %>
-    <% @requests.where(results_ready: true, results_approval: false).each do |request| %>
+    <% @requests.where(results_ready: true, results_approval: false).limit(5).each do |request| %>
       <div class="card shadow mt-2 mb-2">
-        <h5 class="card-header"><%= link_to request.my_unique_id, request_path(request) %></h5>
+        <div class="card-header">
+          <div class="row">
+            <div class="col">
+              <h5><%= link_to request.my_unique_id, request_path(request) %></h5>
+            </div>
+            <div class="col">
+              <h5 class="text-right">Cliente: <%= request.user.first_name %> <%= request.user.last_name  %></h5>
+            </div>
+          </div>
+        </div>
         <div class="card-body row pb-2">
           <h5 class="card-title col"><%= request.project_name %></h5>
           <h5 class="card-text col">Número de Amostras: <%= Sample.where(request_id: request.id).count %></h5>
@@ -99,9 +173,18 @@
       </div>
     </div>
   <% else %>
-    <% @requests.where(results_approval: true).each do |request| %>
+    <% @requests.where(results_approval: true).limit(5).each do |request| %>
       <div class="card shadow mt-2 mb-2">
-        <h5 class="card-header"><%= link_to request.my_unique_id, request_path(request) %></h5>
+        <div class="card-header">
+          <div class="row">
+            <div class="col">
+              <h5><%= link_to request.my_unique_id, request_path(request) %></h5>
+            </div>
+            <div class="col">
+              <h5 class="text-right">Cliente: <%= request.user.first_name %> <%= request.user.last_name  %></h5>
+            </div>
+          </div>
+        </div>
         <div class="card-body row pb-2">
           <h5 class="card-title col"><%= request.project_name %></h5>
           <h5 class="card-text col">Número de Amostras: <%= Sample.where(request_id: request.id).count %></h5>

@@ -3,7 +3,7 @@
     <li>
       <a href="/requests" class="tab-underlined active">Solicitações</a>
     </li>
-    <% unless current_user.tecnician %>
+    <% unless current_user.tecnician || current_user.admin%>
       <li>
         <a href="/requests/new" class="tab-underlined">Nova Solicitação</a>
       </li>

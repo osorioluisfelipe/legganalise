@@ -3,7 +3,7 @@ class Request < ApplicationRecord
   has_many :samples, dependent: :destroy
   has_many :lab_analysis, through: :samples
   validates :project_name, :project_summary, presence: true
-  has_one_attached :result
+  has_one_attached :result, dependent: :destroy
 
   include PgSearch::Model
   pg_search_scope :global_search,
