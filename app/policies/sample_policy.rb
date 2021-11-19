@@ -36,6 +36,7 @@ class SamplePolicy < ApplicationPolicy
   def update?
     tecnician_or_admin? == false
   end
+  
   private
 
   def tecnician_or_admin?
