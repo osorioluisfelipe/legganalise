@@ -15,6 +15,7 @@ class RequestsController < ApplicationController
   def show
     @sample = Sample.new
     authorize @request
+    authorize @sample, :new?
   end
 
   def new
