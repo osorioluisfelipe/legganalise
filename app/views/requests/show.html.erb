@@ -132,10 +132,10 @@
       <%= render 'shared/new_sample' %>
     </div>
     <div class="row justify-content-space-between">
-    <div class="col">
-      <%= link_to 'Apagar Solicitação', request_path(@request), method: :delete, data: { confirm: 'Tem certeza que deseja apagar a solicitação?' }, class: "btn btn-flat" %>
+      <div class="col">
+        <%= link_to 'Apagar Solicitação', request_path(@request), method: :delete, data: { confirm: 'Tem certeza que deseja apagar a solicitação?' }, class: "btn btn-flat" %>
+      </div>
     </div>
-  </div>
   <% else %>
     <% unless @request.request_approval %>
       <br>
