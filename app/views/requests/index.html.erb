@@ -1,21 +1,18 @@
 <%= render 'shared/tabs'%>
 <div class="container bg-light bg-white mt-5 mb-5 p-5">
-  <% if current_user.tecnician %>
     <%# Search Bar %>
     <div class="container border shadow pt-3 bg-light rounded">
       <%= render 'shared/search_form' %>
     </div>
-    <%# Index de Solicitações %>
-    <div class="container border shadow p-3 mb-5 mt-5 bg-light rounded">
+  <% if current_user.admin %>
+    <%# Index de Solicitações Admin %>
+    <%= render '/shared/admin_index_view' %>
+  <% elsif current_user.tecnician %>
+    <%# Index de Solicitações Tecnician%>
       <%= render '/shared/tecnician_index_view' %>
-    </div>
   <% else %>
-    <div class="container border shadow pt-3 bg-light rounded">
-      <%= render 'shared/search_form' %>
-    </div>
-    <br>
-    <div class="container border shadow p-3 mb-5 bg-light rounded">
+    <%# Index de Solicitações Tecnician%>
       <%= render '/shared/user_index_view' %>
-    </div>
   <% end %>
 </div>
+<%= render 'shared/footer' %>

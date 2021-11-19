@@ -20,6 +20,49 @@
           <h4 class="text-right">Número de Amostras: <%= Sample.where(request_id: @request.id).count %></h4>
         </div>
       </div>
+      <div class="row align-items-center">
+      <% if current_user.admin %>
+        <% if @request.results_ready %>
+          <% if @request.results_approval %>
+            <div class="col">
+              <h4><%= link_to "Resultado enviado ao cliente" ,rails_blob_path(@request.result, disposition: 'attachment')%></h4>
+            </div>
+          <% else %>
+            <div class="col">
+              <h4><%= link_to "Resultado" ,rails_blob_path(@request.result, disposition: 'attachment')%></h4>
+            </div>
+            <div class="col">
+              <h4 class="text-right"><%= link_to "Liberar Resultado", update_request_path(@request), method: :update, data: { confirm: 'Confirma a liberação do resultado?' }, class: "btn btn-flat" %></h4>
+            </div>
+          <% end %>
+        <% else %>
+          <% if @request.entry_approval %>
+            <div class="col">
+              <h4 class="text-right"> 🧑🏻‍🔬 Solicitação enviada para análise</h4>
+            </div>
+          <% else %>
+            <div class="col">
+              <h4 class="text-right"><%= link_to "Liberar solicitação", update_request_path(@request), method: :update, data: { confirm: 'Confirma a entrada da solicitação?' }, class: "btn btn-flat" %></h4>
+            </div>
+          <% end %>
+        <% end %>
+      <% elsif current_user.tecnician %>
+        <% if @request.results_approval %>
+          <div class="col">
+            <h4 class="text-right">Resultado liberado pela coordenação</h4>
+          </div>
+        <% else %>
+          <div class="col">
+            <% unless @request.result.blank? %>
+              <h4 ><%= link_to "Resultado" ,rails_blob_path(@request.result, disposition: 'attachment')%></h4>
+            <% end %>
+          </div>
+          <div class="col">
+            <h4 class="text-right">Resultado aguardando liberação</h4>
+          </div>
+        <% end %>
+      <% end %>
+      </div>
     </div>
   </div>
   <div class="container border shadow-sm p-3 mb-3 bg-light rounded">
@@ -75,22 +118,24 @@
   </div>
   <% if current_user.tecnician %>
     <br>
-    <div class="container border shadow p-3 mb-5 bg-light rounded">
-      <%= simple_form_for [ @request ] do |f| %>
-        <%= f.input :result, as: :file, label: :Resultado%>
-        <%= f.submit "Fazer upload" %>
-      <% end %>
-    </div>
+    <% if @request.result.blank? %>
+      <div class="container border shadow p-3 mb-5 bg-light rounded">
+        <%= simple_form_for [ @request ] do |f| %>
+          <%= f.input :result, as: :file, label: :Resultado%>
+          <%= f.submit "Fazer upload" %>
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
   <% if @request.samples.blank? %>
     <div class="container border shadow p-3 mb-5 bg-light rounded">
       <%= render 'shared/new_sample' %>
     </div>
     <div class="row justify-content-space-between">
-    <div class="col">
-      <%= link_to 'Apagar Solicitação', request_path(@request), method: :delete, data: { confirm: 'Tem certeza que deseja apagar a solicitação?' }, class: "btn btn-flat" %>
+      <div class="col">
+        <%= link_to 'Apagar Solicitação', request_path(@request), method: :delete, data: { confirm: 'Tem certeza que deseja apagar a solicitação?' }, class: "btn btn-flat" %>
+      </div>
     </div>
-  </div>
   <% else %>
     <% unless @request.request_approval %>
       <br>
@@ -108,3 +153,4 @@
     <% end %>
   <% end %>
 </div>
+<%= render 'shared/footer' %>
