@@ -6,7 +6,7 @@ class SamplePolicy < ApplicationPolicy
   end
 
   def new?
-    create?
+    true
   end
 
   def create?
@@ -17,7 +17,7 @@ class SamplePolicy < ApplicationPolicy
     if tecnician_or_admin?
       true
     else
-      record.user == user
+      record.request.user == user
     end
   end
 
@@ -25,7 +25,7 @@ class SamplePolicy < ApplicationPolicy
     if tecnician_or_admin?
       false
     else
-      record.user == user
+      record.request.user == user
     end
   end
 
@@ -36,7 +36,7 @@ class SamplePolicy < ApplicationPolicy
   def update?
     tecnician_or_admin? == false
   end
-  
+
   private
 
   def tecnician_or_admin?

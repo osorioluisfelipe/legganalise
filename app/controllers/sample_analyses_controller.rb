@@ -1,11 +1,11 @@
 class SampleAnalysesController < ApplicationController
+  before_action :set_sample
   def new
     @sample_analysis = SampleAnalysis.new
     authorize @sample_analysis
   end
 
   def create
-    @sample = Sample.find(params[:sample_id])
     @lab_analyses = LabAnalysis.where(id: params[:sample_analysis][:lab_analysis_id])
     @lab_analyses.each do |analysis|
       sample_analysis = SampleAnalysis.new(sample: @sample, lab_analysis: analysis)
@@ -18,6 +18,10 @@ class SampleAnalysesController < ApplicationController
   end
 
   private
+  
+  def set_sample
+    @sample = Sample.find(params[:sample_id])
+  end
 
   def lab_analyses_blank(lab_analyses, sample)
     if lab_analyses.blank?

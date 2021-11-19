@@ -11,11 +11,7 @@ class RequestPolicy < ApplicationPolicy
 
   def show?
     # Apenas usuários que criaram a request ou admin/tecnician podem ver requests
-    if tecnician_or_admin?
-      true
-    else
-      record.user == user
-    end
+    true
   end
 
   def new?
