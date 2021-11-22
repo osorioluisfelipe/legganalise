@@ -78,6 +78,8 @@ class RequestsController < ApplicationController
     end
   end
 
+  private
+
   def request_params
     params.require(:request).permit(:sample_quantity, :request_date, :project_name, :project_summary, :result)
   end
