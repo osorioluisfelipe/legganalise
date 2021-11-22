@@ -1,12 +1,5 @@
 <%= render 'shared/tabs'%>
 <div class="container bg-white mt-5 mb-5 p-5">
-  <div class="row mb-2 text-right">
-    <% if current_user.tecnician && @request.request_approval && @request.entry_approval %>
-      <div class="col">
-        <%= link_to "Criar Card no Trello", new_trello_card_path, method: :post, class: "btn btn-flat" %>
-      </div>
-    <% end %>
-  </div>
   <div class="card shadow-sm mb-3">
     <div class="card-body">
       <div class="row">
@@ -124,11 +117,12 @@
       <% end %>
   </div>
   <% if current_user.tecnician %>
+    <br>
     <% if @request.result.blank? %>
       <div class="container border shadow p-3 mb-5 bg-light rounded">
         <%= simple_form_for [ @request ] do |f| %>
-            <%= f.input :result, as: :file, label: :Resultado%>
-            <%= f.submit "Fazer upload"%>
+          <%= f.input :result, as: :file, label: :Resultado%>
+          <%= f.submit "Fazer upload" %>
         <% end %>
       </div>
     <% end %>
