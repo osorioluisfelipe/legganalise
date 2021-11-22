@@ -118,6 +118,9 @@
   </div>
   <% if current_user.tecnician %>
     <br>
+    <% if @request.request_approval && @request.entry_approval %>
+      <%= link_to "novo card", new_trello_card_path, method: :post %>
+    <% end %>
     <% if @request.result.blank? %>
       <div class="container border shadow p-3 mb-5 bg-light rounded">
         <%= simple_form_for [ @request ] do |f| %>
