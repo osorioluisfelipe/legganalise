@@ -9,7 +9,7 @@
       </div>
     </div>
   <% else %>
-    <% @requests.where(request_approval: true, entry_approval: true).limit(5).each do |request| %>
+    <% @requests.where(request_approval: true, entry_approval: true, results_ready: false).limit(5).each do |request| %>
       <div class="card shadow mt-2 mb-2">
         <div class="card-header">
           <div class="row">
@@ -64,7 +64,7 @@
       </div>
     </div>
   <% else %>
-    <% @requests.where(results_ready: true).limit(5).each do |request| %>
+    <% @requests.where(results_ready: true, results_approval: false).limit(5).each do |request| %>
       <div class="card shadow mt-2 mb-2">
         <div class="card-header">
           <div class="row">
