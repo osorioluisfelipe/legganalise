@@ -4,16 +4,16 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     # For additional fields in app/views/devise/registrations/new.html.erb
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :organization, :nickname])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %I[first_name last_name organization nickname photo])
 
     # For additional in app/views/devise/registrations/edit.html.erb
-    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :organization, :nickname])
+    devise_parameter_sanitizer.permit(:account_update, keys: %I[first_name last_name organization nickname photo])
   end
 
   include Pundit
 
   # Pundit: white-list approach.
-  after_action :verify_authorized, except: [:index, :new_card, :add_item, :new_checklist], unless: :skip_pundit?
+  after_action :verify_authorized, except: %I[index new_card add_item new_checklist], unless: :skip_pundit?
   after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
 
   # Uncomment when you *really understand* Pundit!

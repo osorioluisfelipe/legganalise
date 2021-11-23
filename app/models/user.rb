@@ -6,4 +6,5 @@ class User < ApplicationRecord
 
   has_many :requests
   has_many :samples, through: :requests
+  has_one_attached :photo
 end
