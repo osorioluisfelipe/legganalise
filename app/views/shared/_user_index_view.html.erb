@@ -9,7 +9,7 @@
       </div>
     </div>
   <% else %>
-    <% @requests.where(user_id: current_user, results_approval: false).each do |request| %>
+    <% @requests.where(results_approval: false).each do |request| %>
       <div class="card shadow mt-2 mb-2">
         <h5 class="card-header"><%= link_to request.my_unique_id, request_path(request) %></h5>
         <div class="card-body row pb-2">
@@ -58,7 +58,7 @@
       </div>
     </div>
   <% else %>
-    <% @requests.where(user_id: current_user, results_approval: true).each do |request| %>
+    <% @requests.where(results_approval: true).each do |request| %>
       <div class="card shadow mt-2 mb-2">
         <h5 class="card-header"><%= link_to request.my_unique_id, request_path(request) %></h5>
         <div class="card-body row pb-2">
