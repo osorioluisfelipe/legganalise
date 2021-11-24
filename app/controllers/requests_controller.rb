@@ -35,6 +35,7 @@ class RequestsController < ApplicationController
   end
 
   def destroy
+    authorize @request
     @request.destroy
     redirect_to requests_path, notice: "Solicitação excluída com sucesso!"
   end
