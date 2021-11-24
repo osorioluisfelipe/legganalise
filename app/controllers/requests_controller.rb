@@ -3,9 +3,7 @@ class RequestsController < ApplicationController
   def index
     if params[:query].present?
       @requests = policy_scope(Request).global_search(params[:query])
-      if @requests == []
-        redirect_to requests_path, notice: "Busca por #{params[:query]} não encontrada"
-      end
+      redirect_to requests_path, alert: "Busca por #{params[:query]} não encontrada" if @requests.blank?
     else
       @requests = policy_scope(Request).order(created_at: :desc)
     end
