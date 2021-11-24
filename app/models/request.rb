@@ -9,7 +9,7 @@ class Request < ApplicationRecord
   pg_search_scope :global_search,
     against: %i[ project_name project_summary id],
     associated_against: {
-    samples: %i[ sample_name sample_type sample_matrix id]
+    samples: %i[ sample_name sample_type sample_matrix]
     },
     using: {
       tsearch: { prefix: true }

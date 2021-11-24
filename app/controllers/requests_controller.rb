@@ -2,11 +2,8 @@ class RequestsController < ApplicationController
   before_action :set_request, except: %I[index new create]
   def index
     if params[:query].present?
-      if Request.global_search(params[:query]).first.nil?
-        @requests = ""
-      else
-        @requests = policy_scope(Request).global_search(params[:query])
-      end
+      @requests = policy_scope(Request).global_search(params[:query])
+      redirect_to requests_path, alert: "Busca por #{params[:query]} não encontrada" if @requests.blank?
     else
       @requests = policy_scope(Request).order(created_at: :desc)
     end
